@@ -10,11 +10,6 @@ import config
 adc = machine.ADC()
 apin = adc.channel(pin='P19')
 
-Q = b'0'
-def sub_cb(topic, msg):
-    global Q
-    Q = msg
-
 wlan = WLAN(mode=WLAN.STA)
 wlan.connect(config.WIFI_NAME, auth=(WLAN.WPA2, config.WIFI_PW), timeout=5000)
 
@@ -37,6 +32,5 @@ while True:
 
     client.publish(topic=config.TOPIC_NAME, msg=str(celsius))
     
-    print('going to sleep')
     time.sleep(60*10)
-    print('rebooting')
+    
